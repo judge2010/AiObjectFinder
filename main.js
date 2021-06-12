@@ -1,10 +1,12 @@
 var status="";
 object=[];
+var ob;
+var toFind;
 function preload(){
 };
 function setup(){
     Canvas=createCanvas(500 ,450);
-    Canvas.position(550 ,310);
+    Canvas.position(550 ,300);
     ObjectDetector=ml5.objectDetector("cocossd",modelLoaded);
     document.getElementById("status").innerHTML= "Status - Detecting Object";
     video=createCapture(VIDEO);
@@ -36,8 +38,19 @@ function gotResult(error,results){
     if(error){
         console.log(error);
             }
-    else{
+    else{        
                 console.log(results);
                 object=results;
+                ob=results[0].label;
+                console.log(ob);
             };        
+};
+function search(results){
+    toFind=document.getElementById("word").value ;
+if( toFind != ob){
+document.getElementById("detec").innerHTML=toFind + " Not Found";
+}
+else{
+    document.getElementById("detec").innerHTML=toFind + " Found";
+    };
 };
